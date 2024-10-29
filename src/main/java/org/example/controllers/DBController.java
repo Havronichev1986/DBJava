@@ -1,13 +1,13 @@
 package org.example.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.entities.PersonEntity;
 import org.example.services.DBService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +24,32 @@ public class DBController {
     @Operation(summary = "Получить список персон")
     public List<PersonEntity> getPersons(){
         return dbService.getPersons();
+    }
+
+
+    @PutMapping("{id}")
+    @Operation(summary = "Редактирование дпнных")
+    public PersonEntity updateData(@PathVariable Long id, @RequestBody PersonEntity newData) {
+        PersonEntity existingData = dbService.getDataBydId(id);
+        if (existingData == null) {
+            throw new RuntimeException("Данные с идентификатором " + id + " не найдены!");
+        }
+        existingData.setName(newData.getName());
+        existingData.setAge(newData.getAge());
+        return dbService.updateData(existingData);
+    }
+
+    @PostMapping("persons")
+    @Operation(summary = "Сохранить список персон")
+    public List<PersonEntity> postPersons(@RequestBody List<PersonEntity> personEntities){
+        return dbService.postPersons(personEntities);
+    }
+
+//    @Schema(example = "1")
+    @DeleteMapping("{id}")
+    @Operation(summary = "Удалить список персон")
+    public ResponseEntity<Void> deletePersons(@PathVariable Long id) {
+        dbService.deletePersons(id);
+        return ResponseEntity.noContent().build();
     }
 }
