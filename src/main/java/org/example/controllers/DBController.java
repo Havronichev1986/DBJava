@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("db")
 @Tag(name = "Работа с БД")
+@CrossOrigin
 @RequiredArgsConstructor
 
 public class DBController {
