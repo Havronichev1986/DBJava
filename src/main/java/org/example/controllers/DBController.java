@@ -28,12 +28,12 @@ public class DBController {
     }
 
 
-    @PutMapping("{id}")
+    @PutMapping("persons")
     @Operation(summary = "Редактирование дпнных")
-    public PersonEntity updateData(@PathVariable Long id, @RequestBody PersonEntity newData) {
-        PersonEntity existingData = dbService.getDataBydId(id);
+    public PersonEntity updateData(@RequestBody PersonEntity newData) {
+        PersonEntity existingData = dbService.getDataBydId(newData.getId());
         if (existingData == null) {
-            throw new RuntimeException("Данные с идентификатором " + id + " не найдены!");
+            throw new RuntimeException("Данные с идентификатором " + newData.getId() + " не найдены!");
         }
         existingData.setName(newData.getName());
         existingData.setAge(newData.getAge());
@@ -47,9 +47,9 @@ public class DBController {
     }
 
 //    @Schema(example = "1")
-    @DeleteMapping("{id}")
+    @DeleteMapping("persons")
     @Operation(summary = "Удалить список персон")
-    public ResponseEntity<Void> deletePersons(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePersons(@RequestBody Long id) {
         dbService.deletePersons(id);
         return ResponseEntity.noContent().build();
     }
