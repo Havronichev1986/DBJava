@@ -12,22 +12,20 @@ import java.util.List;
 public class DBService {
     private final PersonRepository personRepository;
 
-    public List<PersonEntity> getPersons(){
-        return personRepository.findAll();
+    public List<PersonEntity> getPersons(List<Long> ids){
+        if (ids == null){
+            return personRepository.findAll();
+        }else {
+            return personRepository.findAllById(ids);
+        }
     }
-    //********************************************************
-    public PersonEntity getDataBydId(Long id){
-        return personRepository.findById(id).orElse(null);
-    }
-    public PersonEntity updateData(PersonEntity data){
-        return personRepository.save((PersonEntity) data);
-    }
-    //*********************************************************
-    public List<PersonEntity> postPersons(List<PersonEntity> personEntities){
+    public List<PersonEntity> createPersons(List<PersonEntity> personEntities){
         return personRepository.saveAll(personEntities);
     }
-    //*********************************************************
-    public void deletePersons(Long id){
-        personRepository.deleteById(id);
+
+    public List<PersonEntity> deletePersons(List<Long> ids) {
+        List<PersonEntity> personEntities = personRepository.findAllById(ids);
+        personRepository.deleteAll(personEntities);
+        return personEntities;
     }
 }
