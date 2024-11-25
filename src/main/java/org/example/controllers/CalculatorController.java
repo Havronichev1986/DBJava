@@ -12,25 +12,23 @@ public class CalculatorController {
 
     @GetMapping("/+")
     @Operation(summary = "сложение")
-    public Double add(@RequestParam Double a, @RequestParam Double b) {
-        return a + b;
-    }
+    public Integer add(@RequestParam Integer a, @RequestParam Integer b) {return a + b;}
 
     @GetMapping("/-")
     @Operation(summary = "вычитание")
-    public Double subtract(@RequestParam Double a, @RequestParam Double b) {
+    public Integer subtract(@RequestParam Integer a, @RequestParam Integer b) {
         return a - b;
     }
 
     @GetMapping("/*")
     @Operation(summary = "умножение")
-    public Double multiply(@RequestParam Double a, @RequestParam Double b) {
+    public Integer multiply(@RequestParam Integer a, @RequestParam Integer b) {
         return a * b;
     }
 
     @GetMapping("/")
     @Operation(summary = "деление")
-    public Double divide(@RequestParam Double a, @RequestParam Double b) {
+    public Integer divide(@RequestParam Integer a, @RequestParam Integer b) {
         return a / b;
     }
 }
