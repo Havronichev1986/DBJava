@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "person")
@@ -26,4 +27,20 @@ public class PersonEntity {
     @Schema(example = "37")
     @Column(name = "age")
     private Short age;
+
+    @Override
+    public boolean equals(Object o){
+        if (this==o)return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonEntity that = (PersonEntity) o;
+        return Objects.equals(name,that.name) && Objects.equals(age, that.age);
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(name,age);
+    }
 }
+
+
+
+
