@@ -39,7 +39,6 @@ public class ContextTest {
         personEntities.add(new PersonEntity(10L,"Евгений",(short)65));
     }
     static final List<Long> ids = List.of(1L, 2L);
-    
 
     static Stream<List<Long>> parameters(){return  Stream.of(ids,null);}
 

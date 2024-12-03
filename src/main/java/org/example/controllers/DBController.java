@@ -26,7 +26,6 @@ public class DBController {
         return dbService.getPersons(ids);
     }
 
-
     @PutMapping("persons")
     @Operation(summary = "Редактирование дпнных")
     public List<PersonEntity>changePersons(@RequestBody List<PersonEntity> personEntities){
@@ -38,7 +37,6 @@ public class DBController {
     public List<PersonEntity> createPersons(@RequestBody List<PersonEntity> personEntities){
         return dbService.createPersons(personEntities);
     }
-
 
     @DeleteMapping("persons")
     @Operation(summary = "Удалить список персон")
