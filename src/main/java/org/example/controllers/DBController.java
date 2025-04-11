@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.entities.PersonEntity;
 import org.example.services.DBService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.List;
 
 public class DBController {
 
-    private final DBService dbService;
+    @Autowired
+    private DBService dbService;
 
     @GetMapping("persons")
     @Operation(summary = "Получить список персон")
